@@ -36,6 +36,7 @@ const KEY = '15674931-a9d714b6e9d654524df198e00&q';
 
 // show images 
 const showImages = (images) => {
+  console.log(images)
   imagesArea.style.display = 'block';
   gallery.innerHTML = '';
   // show gallery title
@@ -43,18 +44,31 @@ const showImages = (images) => {
   images.forEach(image => {
     let div = document.createElement('div');
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
-    div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
-    gallery.appendChild(div)
+    div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">
+    
+    <section class="image-info">
+      <h6> Image popularity </h6>
+      <p> Omg! Beautiful image. About  <span class="text-colored">${image.likes}</span> likes this.
+       <span class="text-colored">${image.downloads} </span> user download this image 
+      <span class="text-colored"> more then ${image.views} </span> person views this image
+       and <span class="text-colored"> ${image.comments} </span> person comments on this image.
+      <p>
+    <section>
+    `;
+    gallery.appendChild(div);
+    toggleSpinner(false);
   })
-
+  
 }
 
 const getImages = (query) => {
-  fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
- 
+  toggleSpinner(true);
+
+  fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`) 
     .then(response => response.json())
     .then(data => showImages(data.hits))
     .catch(err => console.log(err))
+  
 }
 
 let slideIndex = 0;
@@ -150,20 +164,23 @@ searchBtn.addEventListener('click', function () {
   getImages(search.value)
   sliders.length = 0;
 })
-// document.getElementById('search').addEventListener('keypress', function(event){
-//   if(event.key == 'Enter'){
-//     document.getElementById('search-btn').click();
-//   }
-
-//   document.querySelector('.main').style.display = 'none';
-//   clearInterval(timer);
-//   const search = document.getElementById('search');
-//   getImages(search.value)
-//   sliders.length = 0;
-
-// })
 
 
 sliderBtn.addEventListener('click', function () {
   createSlider()
 })
+
+
+//spinner 
+const toggleSpinner = function(show){
+  const ispinner = document.getElementById('loading-spinner');
+  if(show){
+    ispinner.classList.remove('spinner');
+  }else{
+    ispinner.classList.add('spinner');
+  }
+  }
+ 
+
+
+
