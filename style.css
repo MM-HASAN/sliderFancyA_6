@@ -1,3 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,700;1,300&display=swap");
+body {
+  font-family: "Open Sans Condensed", sans-serif;
+}
+
 #sliders {
   height: 400px;
   width: 60%;
@@ -77,13 +82,15 @@ img {
 }
 .image-info h6 {
   text-transform: uppercase;
+  font-weight: 700;
   color: #1e1743;
 }
 .image-info p {
   font-size: 12px;
+  font-weight: 300;
 }
 .text-colored {
   color: green;
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 700;
 }

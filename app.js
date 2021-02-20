@@ -6,33 +6,16 @@ const searchBox = document.getElementById('search')
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
 
-
 //search by input box 
 searchBox.addEventListener("keypress", function(event) {
-  console.log(searchBox)
-  //event.preventDefault();
-
   if (event.key == 'Enter')
      { searchBtn.click();}
 });
 
-
-
-
 // selected image 
 let sliders = [];
 
-
-// If this key doesn't work
-// Find the name in the url and go to their website
-// to create your own api key
-//const KEY = '20267299-1894a3f0718636758cecea392';
 const KEY = '15674931-a9d714b6e9d654524df198e00&q';
-
-
-
-
-
 
 // show images 
 const showImages = (images) => {
@@ -68,7 +51,6 @@ const getImages = (query) => {
     .then(response => response.json())
     .then(data => showImages(data.hits))
     .catch(err => console.log(err))
-  
 }
 
 let slideIndex = 0;
@@ -92,6 +74,7 @@ const createSlider = () => {
     alert('Select at least 2 image.')
     return;
   }
+
   // crate slider previous next area
   sliderContainer.innerHTML = '';
   const prevNext = document.createElement('div');
@@ -110,10 +93,7 @@ const createSlider = () => {
   if(duration<0){
      duration =  1000;
     }
-  
-  
-
-  
+    
   sliders.forEach(slide => {
     let item = document.createElement('div')
     item.className = "slider-item";
@@ -122,7 +102,6 @@ const createSlider = () => {
     alt="">`;
     sliderContainer.appendChild(item)
   })
-
 
   changeSlide(0)
   timer = setInterval(function () {
@@ -165,11 +144,9 @@ searchBtn.addEventListener('click', function () {
   sliders.length = 0;
 })
 
-
 sliderBtn.addEventListener('click', function () {
   createSlider()
 })
-
 
 //spinner 
 const toggleSpinner = function(show){
